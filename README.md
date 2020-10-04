@@ -28,6 +28,10 @@
     <a href="https://flameshot.org">
       <img src="https://img.shields.io/github/release/flameshot-org/flameshot.svg?style=flat-square&label=docs" alt="Docs" />
     </a>
+    <br>
+    <a href="https://snapcraft.io/flameshot">
+  <img alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" />
+</a>
   </p>
 </div>
 
@@ -48,6 +52,8 @@
     - [On KDE Plasma desktop](#on-kde-plasma-desktop)
 - [Considerations](#considerations)
 - [Installation](#installation)
+  - [Prebuilt Packages](#prebuilt-packages)
+  - [Packages from Repository](#packages-from-repository)
 - [Compilation](#compilation)
   - [Dependencies](#dependencies)
     - [Compile-time](#compile-time)
@@ -58,10 +64,8 @@
     - [Arch](#arch)
   - [Build](#build)
   - [Install](#install)
-- [Packaging](#packaging)
 - [License](#license)
 - [Contribute](#contribute)
-- [Donations](#donations)
 - [Acknowledgment](#acknowledgment)
 
 ## Features
@@ -215,15 +219,33 @@ Steps for using the configuration:
 
 - If you are using Gnome you need to install the [Gnome Shell Extension Appindicator](https://github.com/Ubuntu/gnome-shell-extension-appindicator) extension in order to see the systemtray icon.
 
-- In order to speed up the first launch of Flameshot (DBus init of the app can be slow), consider starting the application automatically on boot.
-
 - Press <kbd>Enter</kbd> or <kbd>Ctrl</kbd> + <kbd>C</kbd> when you are in a capture mode and you don't have an active selection and the whole desktop will be copied to your clipboard! Pressing <kbd>Ctrl</kbd> + <kbd>S</kbd> will save your capture in a file! Check the [Shortcuts](#keyboard-shortcuts) for more information.
 
 - Flameshot works best with a desktop environment that includes dbus. See this [article](https://wiki.archlinux.org/index.php/Flameshot#Troubleshooting) for tips on using Flameshot in a minimal window manager (dwm, i3, xmonad, etc)
 
+- In order to speed up the first launch of Flameshot (DBus init of the app can be slow), consider starting the application automatically on boot.
+    - Quick tip: If you don't have Flameshot to autostart at boot and you want to set keyboard shortcut, use the following as the command for the keybinding:
+    ```sh
+    ( flameshot &; ) && ( sleep 0.5s && flameshot gui )
+    ```
+
 ## Installation
 
-There are packages available for a few distros:
+Flameshot can be installed on Linux and Microsoft Windows currently.
+
+There are no macOS port of flameshot now. Please participate in the development 
+of flameshot and help us make a macOS port.
+
+### Prebuilt packages
+
+Some prebuilt packages are provided on the release page of the GitHub project
+repository.
+[Click here to visit the release page.](https://github.com/flameshot-org/flameshot/releases).
+
+### Packages from Repository
+
+There are packages available in the repository of
+some Linux distributions:
 
 - [Arch](https://www.archlinux.org/packages/community/x86_64/flameshot/): `pacman -S flameshot`
   + Snapshot also available via AUR: [flameshot-git](https://aur.archlinux.org/packages/flameshot-git).
@@ -232,11 +254,10 @@ There are packages available for a few distros:
 - [Ubuntu 18.04+](https://launchpad.net/ubuntu/+source/flameshot): `apt install flameshot`
 - [openSUSE](https://software.opensuse.org/package/flameshot)
 - [Void Linux](https://github.com/void-linux/void-packages/tree/master/srcpkgs/flameshot) (`xbps-install flameshot`)
-- [Docker](https://github.com/ManuelLR/docker-flameshot)
+- [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
 - Fedora: `dnf install flameshot`
 - [Snap/Flatpak/AppImage](https://github.com/flameshotapp/packages)
-- [Solus](https://dev.getsol.us/source/flameshot/): `eopkg it flameshot`
-- Besides, generic packages available via [opensuse software repository](https://software.opensuse.org//download.html?project=home%3AVitzy&package=flameshot)
+- [Docker](https://github.com/ManuelLR/docker-flameshot)
 
 <details>
   <summary>Expand this section to see what distros are using an up to date version of flameshot</summary>
@@ -244,6 +265,13 @@ There are packages available for a few distros:
     <img src="https://repology.org/badge/vertical-allrepos/flameshot.svg" alt="Packaging status">
   </a>
 </details>
+
+### Tray icon
+
+**Note** that for the Flameshot icon to appear in your tray area, you should have a systray software installed. This is especially true for users who use minimal [window managers](https://wiki.archlinux.org/index.php/window_manager) such as [dwm](https://dwm.suckless.org/). In some [Desktop Environment](https://wiki.archlinux.org/index.php/Desktop_environment) installations (e.g Gnome), the systray might be missing and you can install an application or plugin (e.g [Gnome shell extension](https://extensions.gnome.org/extension/1503/tray-icons/)) to add the systray to your setup. It has been [reported](https://github.com/flameshot-org/flameshot/issues/1009#issuecomment-700781081)) that icon of some softwares, including Flameshot, does not show in [gnome-shell-extension-appindicator](https://github.com/ubuntu/gnome-shell-extension-appindicator).
+
+
+Alternatively, in case you don't want to have a systray, you can always call Flameshot from the terminal. See [Usage section](#usage).
 
 ## Compilation
 

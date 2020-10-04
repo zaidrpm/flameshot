@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.13)
 # This can be read from ${PROJECT_NAME} after project() is called
 project(
   flameshot
-  VERSION 0.8.0
+  VERSION 0.8.3
   LANGUAGES CXX)
 set(PROJECT_NAME_CAPITALIZED "Flameshot")
 
@@ -12,6 +12,12 @@ set(PROJECT_NAME_CAPITALIZED "Flameshot")
 set(DEFAULT_RUN_IN_PLACE FALSE)
 if(WIN32)
 	set(DEFAULT_RUN_IN_PLACE TRUE)
+    # For Windows RC file.
+    add_definitions(-DFLAMESHOT_VERSION_MAJOR=${CMAKE_PROJECT_VERSION_MAJOR})
+    add_definitions(-DFLAMESHOT_VERSION_MINOR=${CMAKE_PROJECT_VERSION_MINOR})
+    add_definitions(-DFLAMESHOT_VERSION_BUGFIX=${CMAKE_PROJECT_VERSION_PATCH})
+    add_definitions(-DFLAMESHOT_VERSION_BUILD=1)
+    add_definitions(-DFLAMESHOT_VERSION_STRING="${PROJECT_VERSION}")
 endif()
 set(RUN_IN_PLACE ${DEFAULT_RUN_IN_PLACE} CACHE BOOL
 	"Run directly in source directory structure")
@@ -25,6 +31,9 @@ add_library(project_options INTERFACE)
 target_compile_features(project_options INTERFACE cxx_std_17)
 
 add_library(project_warnings INTERFACE)
+
+# enable cache system
+include(cmake/Cache.cmake)
 
 # standard compiler warnings
 include(cmake/CompilerWarnings.cmake)

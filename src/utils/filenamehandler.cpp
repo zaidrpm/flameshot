@@ -21,6 +21,7 @@
 #include <QStandardPaths>
 #include <ctime>
 #include <locale>
+#include <<QtDebug>
 
 FileNameHandler::FileNameHandler(QObject* parent)
   : QObject(parent)
@@ -31,6 +32,7 @@ FileNameHandler::FileNameHandler(QObject* parent)
 QString
 FileNameHandler::parsedPattern()
 {
+  qDebug() << "hello";
   return parseFilename(ConfigHandler().filenamePatternValue());
 }
 
@@ -44,6 +46,7 @@ FileNameHandler::parseFilename(const QString& name)
   std::time_t t = std::time(NULL);
 
   char* tempData = QStringTocharArr(res);
+  qDebug() << tempData << std::endl;
   char data[MAX_CHARACTERS] = { 0 };
   std::strftime(data, sizeof(data), tempData, std::localtime(&t));
   res = QString::fromLocal8Bit(data, (int)strlen(data));

@@ -58,4 +58,6 @@ data/flatpak/.flatpak-builder
 # Jetbrains
 .idea/
 
+build
+install_loc.txt
 # End of https://www.gitignore.io/api/snapcraft
